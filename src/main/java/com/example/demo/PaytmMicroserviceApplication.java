@@ -9,5 +9,4 @@ public class PaytmMicroserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PaytmMicroserviceApplication.class, args);
 	}
-
 }
