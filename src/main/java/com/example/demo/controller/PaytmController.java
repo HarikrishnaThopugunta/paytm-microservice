@@ -20,7 +20,7 @@ public class PaytmController {
 	public ResponseEntity<Object[]> getTrainList(){
 		System.out.println("Request Received to Paytm App");
 		RestTemplate restTemplate = new RestTemplate();		
-		ResponseEntity<Object[]> responseEntity = restTemplate.getForEntity("http://irctc-microservice:9090/get-train-list", Object[].class);
+		ResponseEntity<Object[]> responseEntity = restTemplate.getForEntity("${IRCTC_MICROSERVICE_SERVICE_HOST:http://localhost}:9090/get-train-list", Object[].class);
 		Object[] objects = responseEntity.getBody();
 		Arrays.asList(objects).forEach(System.out::println);	
 		return responseEntity;
