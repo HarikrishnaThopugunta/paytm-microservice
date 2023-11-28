@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,10 @@ public class PaytmController {
 	public ResponseEntity<Object[]> getTrainList(){
 		System.out.println("Request Received to Paytm App");
 		RestTemplate restTemplate = new RestTemplate();		
-		ResponseEntity<Object[]> responseEntity = restTemplate.getForEntity("${IRCTC_MICROSERVICE_SERVICE_HOST:http://localhost}:9090/get-train-list", Object[].class);
+		String env = System.getenv("IRCTC_MICROSERVICE_SERVICE_HOST");
+		env = Objects.nonNull(env)? env :"http://localhost";
+		System.out.println("env==============================>" + env);		
+		ResponseEntity<Object[]> responseEntity = restTemplate.getForEntity(env +":9090/get-train-list", Object[].class);
 		Object[] objects = responseEntity.getBody();
 		Arrays.asList(objects).forEach(System.out::println);	
 		return responseEntity;
