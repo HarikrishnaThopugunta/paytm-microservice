@@ -12,16 +12,18 @@ import org.springframework.web.client.RestTemplate;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.SlidingWindowType;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 
 @Service
 public class PaytmCircuitBreakerRegistry {
 
 	CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
+			.slidingWindowType(SlidingWindowType.COUNT_BASED)
 		    .failureRateThreshold(50)
 		    .waitDurationInOpenState(Duration.ofMillis(1000))
 		    .permittedNumberOfCallsInHalfOpenState(2)
-		    .slidingWindowSize(2)
+		    .slidingWindowSize(10)
 		    .recordExceptions(IOException.class, TimeoutException.class)
 		    //.ignoreExceptions(BusinessException.class, OtherBusinessException.class)
 		    .build();
