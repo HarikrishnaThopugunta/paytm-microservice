@@ -1,13 +1,4 @@
-spring:
-  kafka:
-    consumer:
-      enable-auto-commit: true
-      bootstrap-servers: 172.23.87.187:9092
-      group-id: paytm-consumer-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      
+bootstrap-server: localhost:9092      
 management:
   health:
     circuitbreakers:
